@@ -5,6 +5,7 @@ MAINTAINER Sven Beisiegel <mailsvb@gmail.com>
 RUN mkdir /ftpd
 ADD lib /ftpd/lib
 ADD ftp-server /ftpd/
+ADD index.js /ftpd/
 ADD package.json /ftpd/
 RUN chmod +x /ftpd/ftp-server
 
