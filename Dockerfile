@@ -5,7 +5,6 @@ MAINTAINER Sven Beisiegel <mailsvb@gmail.com>
 RUN mkdir /ftpd
 ADD lib /ftpd/lib
 ADD ftp-server /ftpd/
-ADD index.js /ftpd/
 ADD package.json /ftpd/
 RUN chmod +x /ftpd/ftp-server
 
@@ -21,3 +20,6 @@ EXPOSE 21
 
 # expose path
 VOLUME /data
+
+# start server
+CMD [ "./ftp-server", "/data", "--host 0.0.0.0", "--port 21" ]

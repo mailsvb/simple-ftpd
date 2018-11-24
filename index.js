@@ -11,9 +11,9 @@ function ftpd (opts, sessionCb) {
   }
 
   opts = Object.assign({
-    host: '127.0.0.1',
-    port: 1337,
-    root: '/',
+    host: '0.0.0.',
+    port: 21,
+    root: '/data',
     maxConnections: 10,
     readOnly: true
   }, opts)
