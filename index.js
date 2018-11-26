@@ -11,20 +11,21 @@ function ftpd (opts, sessionCb) {
   }
 
   opts = Object.assign({
-    host: '0.0.0.',
+    host: '0.0.0.0',
     port: 21,
     root: '/data',
     maxConnections: 10,
-    readOnly: true
+    readOnly: true,
+    pasvPort: 3000
   }, opts)
-
+  
   const ftpServer = createServer()
   ftpServer.maxConnections = opts.maxConnections
 
   if (sessionCb) {
     ftpServer.on('connection', (socket) => {
       const session = new FTPSession(socket, {
-        root: opts.root, host: opts.host, readOnly: opts.readOnly
+        root: opts.root, host: opts.host, readOnly: opts.readOnly, pasvPort: opts.pasvPort
       })
       session.accept(opts.greet).then(() => {
         sessionCb(session)

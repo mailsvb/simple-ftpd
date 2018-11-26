@@ -11,6 +11,7 @@ const program = require('commander')
   .usage('root [options...]')
   .option('--port [port]', 'set port', (n) => parseInt(n, 10))
   .option('--host [ipv4]', 'set host')
+  .option('--pasv-port [port]', 'set PASV port', (n) => parseInt(n, 10))
   .option('--read-only [bool]', 'set read only mode', (v) => {
     if (v === 'false' || v === 'no') return false
     return true
@@ -25,13 +26,15 @@ const opts = {
   readOnly: readOnly,
   host: program.host || '0.0.0.0',
   port: program.port || 21,
+  pasvPort: program.pasvPort || 3000,
   maxConnections: program.maxConnections || 10
 }
 
 console.log(
-  ' - starting %s ftp server on %s',
+  ' - starting %s ftp server on %s with PASV port %s',
   readOnly ? chalk.green('read only') : chalk.red('full access'),
-  chalk.magenta(opts.root)
+  chalk.magenta(opts.root),
+  chalk.magenta(opts.pasvPort)
 )
 
 const server = ftpd(opts, (session) => {

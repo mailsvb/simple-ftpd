@@ -18,9 +18,10 @@ RUN mkdir /data
 
 # expose FTP port
 EXPOSE 21
+EXPOSE 3000
 
 # expose path
 VOLUME /data
 
 # start server
-CMD [ "./ftp-server", "/data", "--host 0.0.0.0", "--port 21" ]
+CMD [ "./ftp-server", "/data", "--host 0.0.0.0", "--port 21", "--pasv-port 3000" ]
